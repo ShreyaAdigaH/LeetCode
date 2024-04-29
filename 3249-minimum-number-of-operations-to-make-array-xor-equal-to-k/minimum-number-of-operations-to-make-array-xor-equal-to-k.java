@@ -1,14 +1,14 @@
 class Solution {
     public int minOperations(int[] nums, int k) {
-              int bitwiseXOR = k;
+        int xor = k;
         int count = 0;
         for(int num : nums)
-            bitwiseXOR = bitwiseXOR ^ num;
+            xor = xor ^ num;
 
-        while(bitwiseXOR != 0) {
-            if(bitwiseXOR % 2 == 1)
+        while(xor != 0) {
+            if(xor % 2 == 1)
                 count++;
-            bitwiseXOR = bitwiseXOR >> 1;
+            xor = xor >> 1;
         }
         return count;
     }
