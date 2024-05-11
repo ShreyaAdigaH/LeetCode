@@ -4,6 +4,10 @@ class Solution {
         StringBuilder result = new StringBuilder("/");
         Stack<String> resultStack = new Stack<>();
 
+         if (path == null || path.length() <= 1) {
+            return path;
+        }
+
         for (int idx = 1; idx < pathArray.length; idx++) {
             StringBuilder temp = new StringBuilder();
             while (idx != pathArray.length && pathArray[idx] != '/') {
