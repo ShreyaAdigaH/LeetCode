@@ -3,7 +3,23 @@ class Solution {
                                     // {right, left, down, up}
     int[] colDir = { 0, 0, -1, 1 }; //
 
+    public int checkIfAllNonZeros(int[][] grid) {
+        int count = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] != 0)
+                    count += grid[i][j];
+                else
+                    return 0;
+            }
+        }
+        return count;
+    }
+
     public int getMaximumGold(int[][] grid) {
+        int count = checkIfAllNonZeros(grid);
+        if (count != 0)
+            return count;
         int maxGold = 0;
 
         for (int row = 0; row < grid.length; row++) {
@@ -14,16 +30,16 @@ class Solution {
         return maxGold;
     }
 
-     private int dfs(int[][] grid, int row, int col, int rowLength, int colLength) {
-        if(row < 0 || col < 0 || row >= rowLength || col >= colLength || grid[row][col] == 0) {
+    private int dfs(int[][] grid, int row, int col, int rowLength, int colLength) {
+        if (row < 0 || col < 0 || row >= rowLength || col >= colLength || grid[row][col] == 0) {
             return 0;
         }
 
         int currentValue = grid[row][col];
-        grid[row][col] = 0; //to not visit the cell already visited
+        grid[row][col] = 0; // to not visit the cell already visited
         int localMax = currentValue;
 
-        for(int dir = 0; dir < 4; dir++) {
+        for (int dir = 0; dir < 4; dir++) {
             int rowOffset = row + rowDir[dir];
             int colOffset = col + colDir[dir];
             localMax = Math.max(localMax, currentValue + dfs(grid, rowOffset, colOffset, rowLength, colLength));
