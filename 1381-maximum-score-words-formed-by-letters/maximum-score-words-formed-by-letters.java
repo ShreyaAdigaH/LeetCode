@@ -1,38 +1,47 @@
-public class Solution {
-    public int maxScoreWords(String[] words, char[] letters, int[] score) {
-        int[] count = new int[26];
-        int[] lettersCount = new int[26];
-        
-        for (char c : letters) {
-            count[c - 'a']++;
+class Solution {
+     public int maxScoreWords(String[] words, char[] letters, int[] score) {
+        int[] actualFrequency = new int[26];
+        int[] freqCouldBeUsed = new int[26];
+
+        for(char letter : letters) {
+            freqCouldBeUsed[letter - 'a']++; //{letter - 'a'} scales down ascii values of lowercase alphabets to have values between 0 - 26 so that it could be indexed by array
         }
-        
-        int ans = 0;
-        ans = backtracking(words, score, count, lettersCount, 0, 0, ans);
-        return ans;
+
+        int maxScore = 0;
+        maxScore = returnScoreOfSubset(words, score, freqCouldBeUsed, actualFrequency, 0, 0, maxScore);
+        return maxScore;
     }
-    
-    private int backtracking(String[] words, int[] score, int[] count, int[] lettersCount, int pos, int temp, int ans) {
-        for (int i = 0; i < 26; i++) {
-            if (lettersCount[i] > count[i]) return ans;
-        }
-        
-        ans = Math.max(ans, temp);
-        
-        for (int i = pos; i < words.length; i++) {
-            for (char c : words[i].toCharArray()) {
-                lettersCount[c - 'a']++;
-                temp += score[c - 'a'];
-            }
-            
-            ans = backtracking(words, score, count, lettersCount, i + 1, temp, ans);
-            
-            for (char c : words[i].toCharArray()) {
-                lettersCount[c - 'a']--;
-                temp -= score[c - 'a'];
+
+    public int returnScoreOfSubset(String[] words, int[] score, int[] freqCouldBeUsed, int[] actualFrequency, int nextWordPosition, int tempScore, int maxScore) {
+
+        for(int letter = 0; letter < 26; letter++) {
+            if(actualFrequency[letter] > freqCouldBeUsed[letter]) {
+                //in this case you should not use the previously calculated tempScore and return the previously calculated valid maxScore
+                return maxScore;
             }
         }
-        
-        return ans;
+
+        //if the above check passes then assign the maximum score calculated so far
+
+        maxScore = Math.max(maxScore, tempScore);
+
+
+        for(int word = nextWordPosition; word < words.length; word++) {
+            //calculate freq of letters in each word
+            for(char letter : words[word].toCharArray()) {
+                actualFrequency[letter - 'a']++;
+                tempScore += score[letter - 'a'];
+            }
+
+            maxScore = returnScoreOfSubset(words, score, freqCouldBeUsed, actualFrequency, word + 1, tempScore, maxScore);
+
+            //after one recursion stack completes start backtracking to calculate other possible combination from given subset to check max score
+            for(char letter : words[word].toCharArray()) {
+                actualFrequency[letter - 'a']--;
+                tempScore -= score[letter - 'a'];
+            }
+
+        }
+        return maxScore;
     }
 }
