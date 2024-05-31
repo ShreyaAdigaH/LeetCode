@@ -24,7 +24,6 @@ class Solution {
         int num1 = 0;
         int num2 = 0;
         for(int num : nums) {
-            System.out.println("Value " + (num & (1 << bitPosition)));
             if((num & (1 << bitPosition)) == 0)
                 num1 = num1 ^ num;
             else
