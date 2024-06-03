@@ -3,10 +3,12 @@ class Solution {
  int tLength = t.length();
         int sLength = s.length();
         int tIndex = 0;
-        for(int sIndex = 0; tIndex < tLength && sIndex < sLength; sIndex++) {
+        int sIndex = 0;
+        while(tIndex < tLength && sIndex < sLength) {
             if(s.charAt(sIndex) == t.charAt(tIndex)) {
                 tIndex++;
             }
+            sIndex++;
         }
         return tLength - tIndex;
     }
