@@ -1,5 +1,8 @@
 class Solution {
     public int appendCharacters(String s, String t) {
+           if(s.equals(t))
+            return 0;
+            
  int tLength = t.length();
         int sLength = s.length();
         int tIndex = 0;
