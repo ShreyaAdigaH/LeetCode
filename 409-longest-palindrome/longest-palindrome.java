@@ -1,31 +1,30 @@
 class Solution {
     public int longestPalindrome(String s) {
-                int count = 0;
-        HashMap<Character, Integer> freqMap = new HashMap<>();
-        boolean oddNumberFound = false;
+int[] freq = new int[60];
+        int sLength = s.length();
+        for(int index = 0; index < sLength; index++) {
+            System.out.println("letter " + s.charAt(index));
+            freq[s.charAt(index) - 'A']++;
+        }
 
-        for (int idx = 0; idx < s.length(); idx++) {
-            if (freqMap.containsKey(s.charAt(idx))) {
-                freqMap.put(s.charAt(idx), freqMap.get(s.charAt(idx)) + 1);
+        int maxOddLength = 0;
+        int palindromeLength = 0;
+        int oddNumbersCount = 0;
+        int oddLetterTotal = 0;
+        for(int letter = 0; letter < 60; letter++) {
+            if(freq[letter] % 2 == 0) {
+                palindromeLength += freq[letter];
             } else {
-                freqMap.put(s.charAt(idx), 1);
+                oddNumbersCount++;
+                oddLetterTotal += freq[letter];
+                maxOddLength = Math.max(maxOddLength, freq[letter]);
             }
         }
 
-
-        for (Character c : freqMap.keySet()) {
-            int freq = freqMap.get(c);
-            if (freqMap.keySet().size() > 1) {
-                if (freq % 2 == 0) {
-                    count += freq;
-                } else {
-                    oddNumberFound = true;
-                    count = count + freq - 1;
-                }
-            } else {
-                return freqMap.get(c);
-            }
+        if(oddNumbersCount > 1) {
+            oddLetterTotal = (oddLetterTotal - (oddNumbersCount - 1));
         }
-        return oddNumberFound ? count + 1: count;
+
+        return palindromeLength + oddLetterTotal;
     }
 }
