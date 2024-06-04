@@ -5,6 +5,7 @@ class Solution {
         int palindromeLength = 0;
         int oddNumbersCount = 0;
         int oddLetterTotal = 0;
+        
         for(int index = 0; index < sLength; index++) {
             freq[s.charAt(index) - 'A']++;
         }
