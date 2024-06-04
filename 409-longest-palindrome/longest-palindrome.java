@@ -3,7 +3,6 @@ class Solution {
 int[] freq = new int[60];
         int sLength = s.length();
         for(int index = 0; index < sLength; index++) {
-            System.out.println("letter " + s.charAt(index));
             freq[s.charAt(index) - 'A']++;
         }
 
@@ -17,7 +16,6 @@ int[] freq = new int[60];
             } else {
                 oddNumbersCount++;
                 oddLetterTotal += freq[letter];
-                maxOddLength = Math.max(maxOddLength, freq[letter]);
             }
         }
 
