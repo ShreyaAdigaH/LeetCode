@@ -18,9 +18,7 @@ class Solution {
             for (int letter = 0; letter < 26; letter++) {
                 if (baseFreq[letter] != 0) {
                     if (compareFreq[letter] != 0) {
-                        if (baseFreq[letter] > compareFreq[letter]) {
-                            baseFreq[letter] = compareFreq[letter];
-                        }
+                        baseFreq[letter] = Math.min(baseFreq[letter], compareFreq[letter]);
                     } else {
                         baseFreq[letter] = 0;
                     }
