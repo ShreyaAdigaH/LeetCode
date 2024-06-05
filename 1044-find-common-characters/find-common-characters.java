@@ -14,7 +14,6 @@ class Solution {
             for (char c : word.toCharArray()) {
                 compareFreq[c - 'a']++;
             }
-
             for (int letter = 0; letter < 26; letter++) {
                 if (baseFreq[letter] != 0) {
                     if (compareFreq[letter] != 0) {
