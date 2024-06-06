@@ -5,33 +5,25 @@ class Solution {
         }
 
         Arrays.sort(hand);
-        HashMap<Integer, Integer> cardFreq = new HashMap<>();
-        for (int card : hand) {
-            cardFreq.put(card, cardFreq.getOrDefault(card, 0) + 1);
-        }
 
-        int[] sortedKeys = new int[cardFreq.size()];
-        int index = 0;
-        for (int key : cardFreq.keySet()) {
-            sortedKeys[index++] = key;
-        }
-        Arrays.sort(sortedKeys);
-        
-        for(int card : sortedKeys) {
-            while(cardFreq.get(card) > 0) {
-                int nextCard = card + 1;
+        for(int index = 0; index < hand.length; index++) {
+            if(hand[index] >= 0) {
+                int currentIndex = index;
                 int cardCount = 1;
-                cardFreq.put(card, cardFreq.get(card) - 1);
-
-                while (cardCount < groupSize) {
-                    if (cardFreq.containsKey(nextCard) && cardFreq.get(nextCard) > 0) {
-                        cardFreq.put(nextCard, cardFreq.get(nextCard) - 1);
-                    } else {
+                int successor = hand[index] + 1;
+                hand[index] = -1;
+                while(currentIndex < hand.length && cardCount < groupSize) {
+                    if(hand[currentIndex] == successor) {
+                        hand[currentIndex] = -1;
+                        successor = successor + 1;
+                        cardCount++;
+                    } else if (hand[currentIndex] > successor) {
                         return false;
                     }
-                    cardCount++;
-                    nextCard++;
+                    currentIndex++;
                 }
+                if(cardCount != groupSize)
+                    return false;
             }
         }
         return true;
