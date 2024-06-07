@@ -1,4 +1,26 @@
 class Solution {
+    // HashSet<String> dict = new HashSet<>(dictionary);
+    // StringBuilder result = new StringBuilder();
+    // char[
+    // for(int index = 0; index < sentence.length(); index++) {
+    // StringBuilder temp = new StringBuilder();
+    // boolean wordFormed = false;
+    // while(index < sentence.length() && sentence.charAt(index) != ' ') {
+    // if(!wordFormed) {
+    // temp.append(sentence.charAt(index));
+    // if (dict.contains(temp.toString())) {
+    //
+    // wordFormed = true;
+    // }
+    // }
+    // index++;
+    // }
+    // result.append(temp).append(" ");
+    // if(index < sentence.length()) {
+    // result.append(" ");
+    // }
+    // }
+    // return result.deleteCharAt(result.length() - 1).toString();
     Trie root;
 
     public String replaceWords(List<String> dictionary, String sentence) {
