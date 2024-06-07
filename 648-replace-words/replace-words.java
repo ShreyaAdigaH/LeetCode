@@ -2,8 +2,9 @@ class Solution {
     public String replaceWords(List<String> dictionary, String sentence) {
         HashSet<String> dict = new HashSet<>(dictionary);
         StringBuilder result = new StringBuilder();
+        StringBuilder temp;
         for (int index = 0; index < sentence.length(); index++) {
-            StringBuilder temp = new StringBuilder();
+            temp = new StringBuilder();
             boolean wordFormed = false;
             while (index < sentence.length() && sentence.charAt(index) != ' ') {
                 if (!wordFormed) {
@@ -15,11 +16,10 @@ class Solution {
                 }
                 index++;
             }
-            result.append(temp);
-            if (index < sentence.length()) {
-                result.append(" ");
-            }
+            result.append(temp).append(" ");
+
         }
-        return result.toString();
+        return result.deleteCharAt(result.length() - 1).toString();
+
     }
 }
