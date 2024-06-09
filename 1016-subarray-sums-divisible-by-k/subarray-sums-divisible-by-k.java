@@ -14,8 +14,7 @@ class Solution {
             if (remainder < 0)
                 remainder += k;
 
-            if (remainders[remainder] > 0) { // this means that you have added a number along the way that gets divided
-                                             // by k. Hence you got the same remainder as before
+            if (remainders[remainder] > 0) { 
                 count += remainders[remainder];
             }
             remainders[remainder]++;
