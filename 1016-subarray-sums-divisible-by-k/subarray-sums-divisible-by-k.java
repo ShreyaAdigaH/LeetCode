@@ -14,7 +14,7 @@ class Solution {
             if (remainder < 0)
                 remainder += k;
 
-            if (remainders[remainder] > 0) { 
+            if (remainders[remainder] > 0) {
                 count += remainders[remainder];
             }
             remainders[remainder]++;
