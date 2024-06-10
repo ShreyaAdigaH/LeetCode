@@ -1,14 +1,14 @@
 class Solution {
     public int[] countBits(int n) {
-         if(n == 0) {
-            return new int[] {0};
-        }
+        //  if(n == 0) {
+        //     return new int[] {0};
+        // }
         int[] bitCount = new int[n + 1];
 
-        bitCount[0] = 0;
-        bitCount[1] = 1;
+        // bitCount[0] = 0;
+        // bitCount[1] = 1;
 
-        for(int num = 2; num <= n; num++) {
+        for(int num = 0; num <= n; num++) {
             bitCount[num] = bitCount[num / 2] + (num & 1);
         }
         return bitCount;
