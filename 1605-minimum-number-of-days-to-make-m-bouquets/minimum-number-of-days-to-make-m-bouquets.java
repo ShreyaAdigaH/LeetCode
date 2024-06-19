@@ -3,7 +3,9 @@ class Solution {
         // if you can make m bouquets by day d then you can make m bouquets by any day x > d
         // once you find number of days that you could use to make m bouquets try with a number that lesser than that number
         // => binary search
-        
+          if(m * k < 0 || m * k > bloomDay.length) {
+            return -1;
+        }
 
         int minDays = 1;
         int maxDays = 1000000000;
