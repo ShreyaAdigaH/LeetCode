@@ -1,22 +1,19 @@
 class Solution {
-    int[] memo;
-
     public int rob(int[] nums) {
-        memo = new int[nums.length + 1];
-        Arrays.fill(memo, -1);
-        return rob(nums, 0);
-    }
+          if(nums.length == 1) {
+            return nums[0];
+        } 
+        
+        int[] cumulativeLoot = new int[nums.length + 1];
+        cumulativeLoot[0] = 0;
+        cumulativeLoot[1] = nums[0];
 
-    private int rob(int[] nums, int i) {
-        if (i > nums.length - 1) {
-            return 0;
-        }
-        if (memo[i] >= 0) {
-            return memo[i];
-        }
+ 
 
-        int result = Math.max(rob(nums, i + 2) + nums[i], rob(nums, i + 1));
-        memo[i] = result;
-        return result;
+        for(int idx = 1; idx  < nums.length; idx++) {
+            cumulativeLoot[idx + 1] = Math.max(nums[idx] + cumulativeLoot[idx - 1],  cumulativeLoot[idx]);
+        }
+        
+        return cumulativeLoot[nums.length];
     }
 }
