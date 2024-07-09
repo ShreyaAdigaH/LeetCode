@@ -1,7 +1,7 @@
 class Solution {
     public double averageWaitingTime(int[][] customers) {
-          long totalWaitTime = 0;
-        long finishTime = customers[0][0];
+          double totalWaitTime = 0;
+        int finishTime = customers[0][0];
 
         for(int customer = 0; customer < customers.length; customer++) {
             if(finishTime <= customers[customer][0]) {
@@ -13,6 +13,6 @@ class Solution {
             totalWaitTime += (finishTime - customers[customer][0]);
 
         }
-        return (double)totalWaitTime / customers.length;
+        return totalWaitTime / customers.length;
     }
 }
