@@ -1,5 +1,9 @@
 class Solution {
     public boolean checkIfPangram(String sentence) {
+        
+        if(sentence.length()<26){
+            return false;
+        }
         boolean[] alphabets = new boolean[27];
         int totalAlpha = 0;
         for (int index = 0; index < sentence.length(); index++) {
