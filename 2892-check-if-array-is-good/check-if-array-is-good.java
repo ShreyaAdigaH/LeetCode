@@ -12,7 +12,7 @@ class Solution {
             } 
             freq[nums[index]]++;
         }
-        System.out.println(Arrays.toString(freq));
+
         for(int index = 1; index <= nums.length - 1; index++) {
             if(index == nums.length - 1) {
                  if(freq[index] != 2) {
