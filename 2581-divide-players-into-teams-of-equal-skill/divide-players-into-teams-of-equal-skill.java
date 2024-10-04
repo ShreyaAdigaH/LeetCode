@@ -1,16 +1,32 @@
 class Solution {
     public long dividePlayers(int[] skills) {
-                Arrays.sort(skills);
-        int matchedSkillScore = skills[0] + skills[skills.length - 1];
-        long score = 0;
+        int totalPlayers = skills.length;
+        int[] skillsFreq = new int[1001];
+        int totalSkill = 0;
+        int teams = totalPlayers / 2;
+        long totalChemistry = 0;
 
-        for(int index = 0; index < skills.length / 2; index++) {
-            if(skills[index] + skills[skills.length - 1 - index] == matchedSkillScore) {
-                score += ((long) skills[index] * skills[skills.length - 1 - index]);
-            } else {
+        for (int skill : skills) {
+            totalSkill += skill;
+            skillsFreq[skill]++;
+        }
+
+        if (totalSkill % teams != 0) {
+            return -1;
+        }
+
+        int eachTeamSkill = totalSkill / teams;
+
+        for (int playerSkill : skills) {
+            int otherPlayerSkill = eachTeamSkill - playerSkill;
+
+            if (skillsFreq[otherPlayerSkill] == 0) {
                 return -1;
             }
+
+            totalChemistry += (long) playerSkill * (long) otherPlayerSkill;
+            skillsFreq[otherPlayerSkill]--;
         }
-        return score;
+        return  (totalChemistry / 2);
     }
 }
