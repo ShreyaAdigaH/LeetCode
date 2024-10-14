@@ -11,7 +11,7 @@ class Solution {
         while(!maxHeap.isEmpty() && count <= k) {
             int max = maxHeap.poll();
             sum += max;
-            maxHeap.add((int) Math.ceil((double) max / 3));
+            maxHeap.add((max + 2)/ 3);
             count++;
         }
         return sum;
