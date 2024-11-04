@@ -1,6 +1,6 @@
 class Solution {
     public String compressedString(String word) {
-        StringBuffer comp = new StringBuffer();
+        StringBuilder comp = new StringBuilder();
         int charLength = 1;
         for(int i = 1; i < word.length(); i++) {
             if(word.charAt(i) != word.charAt(i - 1)  && charLength > 0) {
