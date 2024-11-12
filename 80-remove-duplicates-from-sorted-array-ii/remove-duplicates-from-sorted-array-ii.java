@@ -3,6 +3,10 @@ class Solution {
         int fp = 0;
         int cp = 0;
         int count = 0;
+         if (nums.length == 0) {
+            return 0;
+        }
+
         while(cp < nums.length) {
             int freq = 0;
             int curr = nums[cp];
