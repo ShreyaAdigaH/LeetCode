@@ -1,20 +1,23 @@
 class Solution {
     public long maxMatrixSum(int[][] matrix) {
         long min = Long.MAX_VALUE;
-        int negCount = 0;
+        boolean isNeg = false;
         long sum = 0;
-        for (int r = 0; r < matrix.length; r++) {
+        for(int r = 0; r < matrix.length; r++) {
             for (int c = 0; c < matrix[0].length; c++) {
                 if (matrix[r][c] < 0) {
-                    negCount++;
+                    isNeg = !isNeg;
+                    matrix[r][c] = -1 * (matrix[r][c]);
                 }
-                sum += Math.abs(matrix[r][c]);
+                sum += matrix[r][c];
 
-                min = Math.min(min, Math.abs(matrix[r][c]));
+                if (matrix[r][c] < min) {
+                    min = matrix[r][c];
+                }
             }
         }
 
-        if (min != 0 && negCount % 2 != 0) {
+        if(isNeg) {
             sum = sum - (2 * min);
         }
 
