@@ -5,14 +5,15 @@ class Solution {
         long sum = 0;
         for(int r = 0; r < matrix.length; r++) {
             for (int c = 0; c < matrix[0].length; c++) {
-                if (matrix[r][c] < 0) {
+                int value = matrix[r][c];
+                if (value < 0) {
                     isNeg = !isNeg;
-                    matrix[r][c] = -1 * (matrix[r][c]);
+                    value = -1 * (value);
                 }
-                sum += matrix[r][c];
+                sum += value;
 
-                if (matrix[r][c] < min) {
-                    min = matrix[r][c];
+                if (value < min) {
+                    min = value;
                 }
             }
         }
