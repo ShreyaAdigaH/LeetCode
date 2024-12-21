@@ -15,7 +15,32 @@
  */
 class Solution {
     public TreeNode reverseOddLevels(TreeNode root) {
-       Queue<TreeNode> tree = new LinkedList<>();
+        if(root == null) {
+            return root;
+        }
+
+       
+       reverseOddLevelsRec(root.left, root.right, 1);
+       return root;
+    }
+
+    public void reverseOddLevelsRec(TreeNode leftNode, TreeNode rightNode, int level) {
+         if (leftNode == null || rightNode == null) {
+        return;
+    }
+
+    if (level % 2 == 1) {
+        int temp = leftNode.val;
+        leftNode.val = rightNode.val;
+        rightNode.val = temp;
+    }
+
+    reverseOddLevelsRec(leftNode.left, rightNode.right, level + 1);  
+    reverseOddLevelsRec(leftNode.right, rightNode.left, level + 1);
+    }
+
+    /* 
+      Queue<TreeNode> tree = new LinkedList<>();
         tree.add(root);
         int level = 0;
         List<TreeNode> levelNodes;
@@ -50,5 +75,5 @@ class Solution {
             level += 1;
         }
         return root;
-    }
+        */
 }
