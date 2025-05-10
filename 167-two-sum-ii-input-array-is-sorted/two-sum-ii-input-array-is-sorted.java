@@ -12,6 +12,6 @@ class Solution {
                 lp++;
             }
         }
-        return new int[] {lp + 1, rp + 1};
+        return new int[]{0};
     }
 }
