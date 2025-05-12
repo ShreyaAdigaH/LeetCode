@@ -23,10 +23,12 @@ class Solution {
             int width = (rp - lp);
             area = Math.max(area, (width * minHeight));
 
-            if(height[rp] <= height[lp]) {
+            if (height[rp] <= height[lp]) {
                 rp--;
+
             } else {
                 lp++;
+
             }
 
         }
