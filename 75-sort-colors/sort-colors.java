@@ -1,21 +1,18 @@
 class Solution {
     public void sortColors(int[] nums) {
-        int zeros = 0, ones = 0, n = nums.length;
+        int[] freq = new int[3];
         for(int num : nums) {
-            if(num == 0) zeros++;
-            else if(num == 1) ones++;
-        }  
-
-        for(int i = 0; i < zeros; ++i) {
-            nums[i] = 0;
+            freq[num]++;
         }
 
-        for(int i = zeros; i < zeros + ones; ++i) {
-            nums[i] = 1;
+        int tracIn = 0;
+        for(int i = 0; i < 3; i++) {
+            int count = freq[i];
+
+            for(int j = 0; j < count; j++) {
+                nums[tracIn++] = i;
+            }
         }
 
-        for(int i = zeros + ones; i < n; ++i) {
-            nums[i] = 2;
-        }
     }
 }
