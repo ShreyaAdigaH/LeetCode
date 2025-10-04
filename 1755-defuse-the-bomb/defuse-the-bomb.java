@@ -2,6 +2,8 @@ class Solution {
     public int[] decrypt(int[] code, int k) {
 
         //idx = ((idx % n) + n) % n;
+        //bruteforce
+        /**** 
         int n = code.length;
         int[] res = new int[code.length];
         if(k == 0) {
@@ -21,6 +23,33 @@ class Solution {
             res[i] = sum;
         }
         return res;
+        */
 
+        int start = 1;
+        int end = k;
+        int[] res = new int[code.length];
+         int n = code.length;
+
+        if(k < 0) {
+            start = n - (-k);
+            end = n - 1;
+        }
+
+        int sum = 0;
+        for(int i = start; i <= end; i++) {
+            sum += code[i];
+        
+        }
+
+       // res[0] = sum;
+
+        for(int i = 0; i < n; i++) {
+            res[i] = sum;
+            sum -= code[start % n];
+            sum += code[(end + 1)% n];
+            start++;
+            end++;
+        }
+        return res;
     }
 }
