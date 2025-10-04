@@ -1,49 +1,48 @@
-import java.util.PriorityQueue;
-
 class Solution {
-    public int trapRainWater(int[][] height) {
-        int n = height.length;
-        int m = height[0].length;
+    public int trapRainWater(int[][] heightMap) {
+        int rows = heightMap.length;
+        int cols = heightMap[0].length;
+        PriorityQueue<int[]> cells = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+        boolean[][] visited = new boolean[rows][cols];
 
-        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0]);
-        boolean[][] vis = new boolean[n][m];
+        for (int i = 0; i < rows; i++) {
+            cells.offer(new int[] {heightMap[i][0], i, 0});
+            visited[i][0] = true;
 
-        // Add first and last column
-        for (int i = 0; i < n; i++) {
-            vis[i][0] = true;
-            vis[i][m - 1] = true;
-            pq.offer(new int[]{height[i][0], i, 0});
-            pq.offer(new int[]{height[i][m - 1], i, m - 1});
+            cells.offer(new int[] {heightMap[i][cols - 1], i, cols - 1});
+            visited[i][cols - 1] = true;
         }
 
-        // Add first and last row
-        for (int i = 0; i < m; i++) {
-            vis[0][i] = true;
-            vis[n - 1][i] = true;
-            pq.offer(new int[]{height[0][i], 0, i});
-            pq.offer(new int[]{height[n - 1][i], n - 1, i});
+        for (int i = 0; i < cols; i++) {
+            cells.offer(new int[] {heightMap[0][i], 0, i});
+            visited[0][i] = true;
+
+            cells.offer(new int[] {heightMap[rows - 1][i], rows - 1, i});
+            visited[rows - 1][i] = true;
         }
 
+        int[][] dir = new int[][] {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
         int ans = 0;
-        int[] dr = {-1, 0, 1, 0};
-        int[] dc = {0, -1, 0, 1};
 
-        while (!pq.isEmpty()) {
-            int[] curr = pq.poll();
-            int h = curr[0], r = curr[1], c = curr[2];
+        while(!cells.isEmpty()) {
+            int[] curr = cells.poll();
+            int currHeight = curr[0];
+            int currRow = curr[1];
+            int currCol = curr[2];
 
-            for (int i = 0; i < 4; i++) {
-                int nr = r + dr[i];
-                int nc = c + dc[i];
+            for(int i = 0; i < 4; i++) {
+                int nr = currRow + dir[i][0];
+                int nc = currCol + dir[i][1];
 
-                if (nr >= 0 && nr < n && nc >= 0 && nc < m && !vis[nr][nc]) {
-                    ans += Math.max(0, h - height[nr][nc]);
-                    pq.offer(new int[]{Math.max(h, height[nr][nc]), nr, nc});
-                    vis[nr][nc] = true;
+                if(nr < rows && nr > 0 && nc < cols && nc > 0 && !visited[nr][nc]) {
+                    int cellHeight = heightMap[nr][nc];
+                    ans += Math.max(0, currHeight - cellHeight);
+                    cells.offer(new int[] {Math.max(currHeight, cellHeight), nr, nc});
+                    visited[nr][nc] = true;
                 }
             }
-        }
 
+        }
         return ans;
     }
 }
