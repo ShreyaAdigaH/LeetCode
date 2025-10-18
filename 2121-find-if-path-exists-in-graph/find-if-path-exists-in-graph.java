@@ -16,7 +16,6 @@ class Solution {
         boolean[] visited = new boolean[n];
         Queue<Integer> queue = new LinkedList<>();
         queue.offer(source);
-        visited[source] = true;
 
         while (!queue.isEmpty()) {
             int node = queue.poll();
