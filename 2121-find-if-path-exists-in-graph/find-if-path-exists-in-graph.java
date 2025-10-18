@@ -1,34 +1,38 @@
-import java.util.*;
-
 class Solution {
     public boolean validPath(int n, int[][] edges, int source, int destination) {
-        // Step 1: Build adjacency list
+        // using dfs
+
         List<List<Integer>> graph = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             graph.add(new ArrayList<>());
         }
-        for (int[] e : edges) {
-            graph.get(e[0]).add(e[1]);
-            graph.get(e[1]).add(e[0]);
+
+        for(int[] edge : edges) {
+            graph.get(edge[0]).add(edge[1]);
+            graph.get(edge[1]).add(edge[0]);
         }
 
-        // Step 2: BFS traversal
         boolean[] visited = new boolean[n];
         Queue<Integer> queue = new LinkedList<>();
         queue.offer(source);
 
-        while (!queue.isEmpty()) {
-            int node = queue.poll();
-            if (node == destination) return true;
+        while(!queue.isEmpty()) {
+            int curr = queue.poll();
 
-            for (int nei : graph.get(node)) {
-                if (!visited[nei]) {
-                    visited[nei] = true;
-                    queue.offer(nei);
+            if(curr == destination) {
+                return true;
+            }
+
+            for(int neigh : graph.get(curr)) {
+                if(!visited[neigh]) {
+               
+                    queue.offer(neigh);
+                         visited[neigh] = true;
                 }
             }
         }
 
         return false;
+
     }
 }
