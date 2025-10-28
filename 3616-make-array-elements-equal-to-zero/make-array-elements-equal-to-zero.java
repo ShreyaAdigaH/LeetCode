@@ -25,7 +25,7 @@ class Solution {
         int curr = start;
         int n = nums.length;
 
-        while(curr < n && curr >= 0) {
+        while(nonZeros > 0 && curr < n && curr >= 0) {
             if(temp[curr] > 0) {
                 temp[curr]--;
                 dir = dir * -1;
