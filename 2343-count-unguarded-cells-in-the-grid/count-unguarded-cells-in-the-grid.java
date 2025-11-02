@@ -1,52 +1,63 @@
 class Solution {
     public int countUnguarded(int m, int n, int[][] guards, int[][] walls) {
-           int[][] grid = new int[m][n];
+        int[][] grid = new int[m][n];
 
-       for(int i = 0; i < guards.length; i++) {
-           grid[guards[i][0]][guards[i][1]] = 1;
-       }
+        for (int[] guard : guards) {
+            grid[guard[0]][guard[1]] = 1;
+        }
 
-       for(int i = 0; i < walls.length; i++) {
-           grid[walls[i][0]][walls[i][1]] = 2;
-       }
+        for (int[] wall : walls) {
+            grid[wall[0]][wall[1]] = 2;
+        }
 
-       for(int guard = 0; guard < guards.length; guard++) {
-           int r = guards[guard][0];
-           int c = guards[guard][1];
-                for(int row = r + 1; row < m; row++) {
-                    if(grid[row][c] == 1 || grid[row][c] == 2){
-                        break;
-                    }
-                    grid[row][c] = 3;
+
+        for(int[] guard : guards) {
+            int row = guard[0];
+            int col = guard[1];
+
+            for(int r = row + 1; r < m; r++) {
+                if(grid[r][col] == 1 || grid[r][col] == 2) {
+                    break;
                 }
-           for(int row = r - 1; row >= 0; row--) {
-               if(grid[row][c] == 1 || grid[row][c] == 2){
-                   break;
-               }
-               grid[row][c] = 3;
-           }
-           for(int col = c + 1;  col < n; col++) {
-               if(grid[r][col] == 1 || grid[r][col] == 2){
-                   break;
-               }
-               grid[r][col] = 3;
-           }
-           for(int col = c - 1;  col >= 0; col--) {
-               if(grid[r][col] == 1 || grid[r][col] == 2){
-                   break;
-               }
-               grid[r][col] = 3;
-           }
-       }
 
-       int res = 0;
-       for(int r = 0; r < grid.length; r++) {
-           for(int c = 0; c < grid[0].length; c++) {
-               if(grid[r][c] == 0) {
-                   res++;
-               }
-           }
-       }
-       return res;
+                grid[r][col] = 3;
+            }
+
+             for(int r = row - 1; r >= 0; r--) {
+                if(grid[r][col] == 1 || grid[r][col] == 2) {
+                    break;
+                }
+
+                grid[r][col] = 3;
+            }
+
+             for(int c = col + 1; c < n; c++) {
+                if(grid[row][c] == 1 || grid[row][c] == 2) {
+                    break;
+                }
+
+                grid[row][c] = 3;
+            }
+
+             for(int c = col - 1; c >= 0; c--) {
+                if(grid[row][c] == 1 || grid[row][c] == 2) {
+                    break;
+                }
+
+                grid[row][c] = 3;
+            }
+        }
+
+        int ans = 0;
+
+        for(int row = 0; row < m; row++) {
+            for(int col = 0; col < n; col++) {
+                if(grid[row][col] == 0)
+                    ans++;
+            }
+        }
+
+        return ans;
+     
     }
 }
