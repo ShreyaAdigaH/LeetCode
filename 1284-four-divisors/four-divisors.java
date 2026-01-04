@@ -15,6 +15,10 @@ class Solution {
                     }
                     sum += i;
 
+                    if(count > 4) {
+                        break;
+                    }
+
                 }
             }
             if (count == 4) {
